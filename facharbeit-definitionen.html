@@ -85,8 +85,26 @@
         .nav-home{color:var(--muted);font-size:0.7rem;text-align:center;}
         .nav-home a{color:var(--teal);text-decoration:none;}
 
-        footer{text-align:center;padding:50px 40px;color:#333;font-size:0.75rem;letter-spacing:1px;}
+                /* ── FOOTER ── */
+        footer {
+            text-align: center;
+            padding: 60px 40px;
+            border-top: 1px solid var(--border);
+            color: #00c5b5; /* Etwas weicher als #333 */
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
 
+        footer p {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        footer span:not(#jahr) {
+            color: var(--teal);
+            text-transform: uppercase; /* Passt oft gut zum weiten Letter-Spacing */
+        }
         /* REVEAL */
         .reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease;}
         .reveal.visible{opacity:1;transform:translateY(0);}
@@ -97,12 +115,16 @@
     <nav class="topbar">
         <a href="index.html" class="active">START</a>
         <div class="div"></div>
+        <a href="Facharbeit.pdf" class="passive">DOWNLOAD</a>
+        <div class="div"></div>
         <a href="impressum.html" class="passive">IMPRESSUM</a>
         <div class="div"></div>
         <a href="datenschutz.html" class="passive">DATENSCHUTZ</a>
         <div class="div"></div>
         <a href="quellen.html" class="passive">QUELLEN</a>
+
     </nav>
+
 
 <div class="ch-header">
     <div class="ch-num">Kapitel 2</div>
@@ -154,12 +176,18 @@
 
 <div class="ch-nav">
     <a href="facharbeit-einleitung.html" class="ch-nav nav-back">← Einleitung</a>
-    <div class="nav-home"><a href="facharbeit.html">↑ Übersicht</a></div>
+    <div class="nav-home"><a href="index.html">↑ Übersicht</a></div>
     <a href="facharbeit-geschichte.html" class="ch-nav nav-next">Geschichte →</a>
 </div>
-<footer><p>&copy; <span id="j"></span> CoreBuilds Systems · Seminarfacharbeit</p></footer>
+<footer>
+    <p>
+        &copy; <span id="jahr"></span> 
+        | <strong>natürlich / künstlich</strong> 
+        – Grenzen der KI von Sascha Gröger
+    </p>
+</footer>
 <script>
-document.getElementById('j').textContent=new Date().getFullYear();
+        document.getElementById("jahr").textContent = new Date().getFullYear();
 const obs=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('visible')),{threshold:0.08});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>

@@ -45,17 +45,14 @@
 
         /* ── HERO ── */
         .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 100px 40px 60px;
-            position: relative;
-            overflow: hidden;
-        }
-
+                    min-height: 100vh;
+                    display: flex;
+                    align-items: center; /* Vertikale Zentrierung des gesamten Inhalts */
+                    justify-content: center;
+                    padding: 100px 40px 60px;
+                    position: relative;
+                    overflow: hidden;
+                }
         /* Animated grid background */
         .hero::before {
             content: '';
@@ -91,7 +88,16 @@
             50% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
         }
 
-        .hero-content { position: relative; z-index: 2; max-width: 900px; }
+        .hero-content { 
+            position: relative; 
+            z-index: 2; 
+            max-width: 1200px; /* Erhöht für Nebeneinander-Darstellung */
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
 
         .hero-badge {
             display: inline-block;
@@ -107,6 +113,32 @@
             margin-bottom: 32px;
             background: var(--teal-dim);
             animation: fadeUp 0.8s ease both;
+        }
+        
+        .hero-text {
+            flex: 1;
+            text-align: left; /* Text nach links */
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            animation: fadeUp 1s 0.3s ease both;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 550px; /* Begrenzt die Bildgröße */
+            height: auto;
+            filter: drop-shadow(0 0 30px var(--teal-glow));
+            /* Kleiner Floating-Effekt */
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
         }
 
         .hero h1 {
@@ -124,12 +156,30 @@
         }
 
         .hero-subtitle {
-            font-size: clamp(1rem, 2vw, 1.3rem);
-            color: var(--text-muted);
-            max-width: 620px;
-            margin: 0 auto 16px;
-            line-height: 1.6;
-            animation: fadeUp 0.8s 0.2s ease both;
+                    font-size: clamp(1rem, 2vw, 1.3rem);
+                    color: var(--text-muted);
+                    max-width: 620px;
+                    margin: 0 0 16px 0; /* Margin auto entfernt */
+                    line-height: 1.6;
+                    animation: fadeUp 0.8s 0.2s ease both;
+
+        }
+
+        /* Mobile Optimierung: Auf Handys wieder untereinander */
+        @media (max-width: 900px) {
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .hero-text {
+                text-align: center;
+            }
+            .hero-subtitle {
+                margin: 0 auto 16px;
+            }
+            .hero-image img {
+                max-width: 80%;
+            }
         }
 
         .hero-meta {
@@ -428,11 +478,23 @@
             text-align: center;
             padding: 60px 40px;
             border-top: 1px solid var(--border);
-            color: #333;
+            color: #00c5b5; /* Etwas weicher als #333 */
             font-size: 0.8rem;
             letter-spacing: 1px;
         }
-        footer span { color: var(--teal); }
+
+        footer p {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        footer span:not(#jahr) {
+            color: var(--teal);
+            text-transform: uppercase; /* Passt oft gut zum weiten Letter-Spacing */
+        }
+
+
 
         /* ── ANIMATIONS ── */
         @keyframes fadeUp {
@@ -466,33 +528,49 @@
     <nav class="topbar">
         <a href="index.html" class="active">START</a>
         <div class="div"></div>
+        <a href="Facharbeit.pdf" class="passive">DOWNLOAD</a>
+        <div class="div"></div>
         <a href="impressum.html" class="passive">IMPRESSUM</a>
         <div class="div"></div>
         <a href="datenschutz.html" class="passive">DATENSCHUTZ</a>
         <div class="div"></div>
         <a href="quellen.html" class="passive">QUELLEN</a>
+
     </nav>
 
-    <!-- HERO -->
-    <div class="hero">
-        <div class="hero-content">
-            <div class="hero-badge">Seminarfacharbeit 2026</div>
-            <h1>Wo liegen die<br>Grenzen der KI?</h1>
-            <p class="hero-subtitle">
-                Denken, Kreativität und Problemlösung –<br>
-                Mensch vs. Maschine im direkten Vergleich.
-            </p>
-            <p class="hero-meta">Waldschule Hagen-Beverstedt &nbsp;·&nbsp; natürlich / künstlich &nbsp;·&nbsp; 2026</p>
-            <div class="hero-cta">
-                <a href="#kapitel" class="btn-primary">Zur Arbeit →</a>
-                <a href="facharbeit-einleitung.html" class="btn-secondary">Einleitung lesen</a>
+        <!-- HERO -->
+            <div class="hero">
+                <div class="hero-content">
+                    
+                    <!-- TEXT LINKS -->
+                    <div class="hero-text">
+                        <div class="hero-badge">Seminarfacharbeit 2026</div>
+                        <h1>Wo liegen die<br>Grenzen der KI?</h1>
+                        <p class="hero-subtitle">
+                            Denken, Kreativität und Problemlösung –<br>
+                            Mensch vs. Maschine im direkten Vergleich.
+                        </p>
+                        <p class="hero-meta">Waldschule Hagen-Beverstedt &nbsp;·&nbsp; natürlich / künstlich &nbsp;·&nbsp; 2026</p>
+                        
+                        <div class="hero-cta">
+                            <a href="#kapitel" class="btn-primary">Zur Arbeit →</a>
+                            <a href="facharbeit-einleitung.html" class="btn-secondary">Einleitung lesen</a>
+                        </div>
+                    </div>
+
+                    <!-- BILD RECHTS -->
+                    <div class="hero-image">
+                        <img src="/Bilder/KI vs Mensch Deckblattbild.png" alt="KI vs Mensch">
+                    </div>
+
+                </div>
+
+                <!-- SCROLL HINT (absolut positioniert am unteren Rand des Hero) -->
+                <div class="scroll-hint" style="position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);">
+                    <span>SCROLLEN</span>
+                    <div class="scroll-arrow"></div>
+                </div>
             </div>
-        </div>
-        <div class="scroll-hint">
-            <span>SCROLLEN</span>
-            <div class="scroll-arrow"></div>
-        </div>
-    </div>
 
     <!-- STATS -->
     <div class="stats-row">
@@ -623,9 +701,13 @@
 
     <hr class="divider-line">
 
-    <footer>
-        <p>&copy; <span id="jahr"></span> CoreBuilds Systems &nbsp;·&nbsp; <span>Seminarfacharbeit</span> – Informatik &amp; Gesellschaft</p>
-    </footer>
+<footer>
+    <p>
+        &copy; <span id="jahr"></span> 
+        | <strong>natürlich / künstlich</strong> 
+        – Grenzen der KI von Sascha Gröger
+    </p>
+</footer>
 
     <script>
         document.getElementById("jahr").textContent = new Date().getFullYear();
