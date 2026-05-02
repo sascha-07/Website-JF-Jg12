@@ -16,8 +16,15 @@
             --bg-card: #0f0f1a;
             --border: rgba(0, 197, 181, 0.2);
             --text: #ffffff;
-            --text-muted: #aaaaaa;
             --gradient-main: linear-gradient(90deg, #00c5b5, #0077ff);
+            --teal: #00c5b5;
+            --teal-dim: rgba(0,197,181,0.12);
+            --teal-glow: rgba(0,197,181,0.4);
+            --bg: #0b0b0b;
+            --bg-card: #0f0f1a;
+            --border: rgba(0,197,181,0.18);
+            --text: #ffffff;
+            --muted: #999;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -33,7 +40,7 @@
         nav.topbar{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;gap:4px;padding:0 24px;height:54px;background:rgba(6,6,20,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);flex-wrap:wrap;}
         nav.topbar a{color:var(--muted);text-decoration:none;font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.65rem;letter-spacing:1.5px;padding:5px 9px;border-radius:4px;transition:color 0.2s,background 0.2s;}
         nav.topbar a:hover{color:var(--teal);background:var(--teal-dim);}
-        nav.topbar a.active{color:var(--teal);}
+        nav.topbar a.active{color:var(--teal);background:var(--teal-dim);}
         nav.topbar .div{width:1px;height:18px;background:var(--border);margin:0 4px;}
 
         /* ── HERO ── */
@@ -457,10 +464,12 @@
 
     <!-- NAVIGATION -->
     <nav class="topbar">
-        <div class="divider"></div>
-        <a href="facharbeit.html" class="passive">START</a>
+        <a href="index.html" class="active">START</a>
+        <div class="div"></div>
         <a href="impressum.html" class="passive">IMPRESSUM</a>
+        <div class="div"></div>
         <a href="datenschutz.html" class="passive">DATENSCHUTZ</a>
+        <div class="div"></div>
         <a href="quellen.html" class="passive">QUELLEN</a>
     </nav>
 

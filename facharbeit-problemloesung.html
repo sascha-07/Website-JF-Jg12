@@ -24,7 +24,7 @@
         nav.topbar{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;gap:4px;padding:0 24px;height:54px;background:rgba(6,6,20,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);flex-wrap:wrap;}
         nav.topbar a{color:var(--muted);text-decoration:none;font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.65rem;letter-spacing:1.5px;padding:5px 9px;border-radius:4px;transition:color 0.2s,background 0.2s;}
         nav.topbar a:hover{color:var(--teal);background:var(--teal-dim);}
-        nav.topbar a.active{color:var(--teal);}
+        nav.topbar a.active{color:var(--teal);background:var(--teal-dim);}
         nav.topbar .div{width:1px;height:18px;background:var(--border);margin:0 4px;}
 
         /* CHAPTER HEADER */
@@ -95,16 +95,17 @@
 <body>
     <!-- NAVIGATION -->
     <nav class="topbar">
-        <div class="divider"></div>
-        <a href="facharbeit.html" class="passive">START</a>
+        <a href="index.html" class="active">START</a>
+        <div class="div"></div>
         <a href="impressum.html" class="passive">IMPRESSUM</a>
+        <div class="div"></div>
         <a href="datenschutz.html" class="passive">DATENSCHUTZ</a>
+        <div class="div"></div>
         <a href="quellen.html" class="passive">QUELLEN</a>
     </nav>
-
 <div class="ch-header">
     <div class="ch-num">Kapitel 6</div>
-    <h1 class="ch-title">Problemlösung & Entscheidungsfindung</h1>
+    <h1 class="ch-title">Problemlösung & Entscheidungs-findung</h1>
     <p class="ch-lead">Effizienz vs. Kontextverständnis – wie KI-Agenten Probleme angehen und wo die Grenzen liegen.</p>
 </div>
 <hr class="divline">
