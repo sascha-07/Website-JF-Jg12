@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facharbeit | KI – Grenzen des Denkens</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --teal: #00c5b5;
+            --teal-dim: rgba(0, 197, 181, 0.15);
+            --teal-glow: rgba(0, 197, 181, 0.4);
+            --bg: #0b0b0b;
+            --bg-deep: #060614;
+            --bg-card: #0f0f1a;
+            --border: rgba(0, 197, 181, 0.2);
+            --text: #ffffff;
+            --text-muted: #aaaaaa;
+            --gradient-main: linear-gradient(90deg, #00c5b5, #0077ff);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg);
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* ── TOPBAR ── */
+        nav.topbar{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;gap:4px;padding:0 24px;height:54px;background:rgba(6,6,20,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);flex-wrap:wrap;}
+        nav.topbar a{color:var(--muted);text-decoration:none;font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.65rem;letter-spacing:1.5px;padding:5px 9px;border-radius:4px;transition:color 0.2s,background 0.2s;}
+        nav.topbar a:hover{color:var(--teal);background:var(--teal-dim);}
+        nav.topbar a.active{color:var(--teal);}
+        nav.topbar .div{width:1px;height:18px;background:var(--border);margin:0 4px;}
+
+        /* ── HERO ── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 100px 40px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated grid background */
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(var(--border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 60px 60px;
+            mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+            animation: gridPulse 8s ease-in-out infinite;
+        }
+
+        @keyframes gridPulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Glowing orb */
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 600px; height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0,197,181,0.12) 0%, transparent 70%);
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            animation: orbPulse 6s ease-in-out infinite;
+        }
+
+        @keyframes orbPulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+            50% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+        }
+
+        .hero-content { position: relative; z-index: 2; max-width: 900px; }
+
+        .hero-badge {
+            display: inline-block;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--teal);
+            border: 1px solid var(--teal);
+            padding: 6px 18px;
+            border-radius: 20px;
+            margin-bottom: 32px;
+            background: var(--teal-dim);
+            animation: fadeUp 0.8s ease both;
+        }
+
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: clamp(2.2rem, 6vw, 5rem);
+            line-height: 1.05;
+            text-transform: uppercase;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+            animation: fadeUp 0.8s 0.1s ease both;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            color: var(--text-muted);
+            max-width: 620px;
+            margin: 0 auto 16px;
+            line-height: 1.6;
+            animation: fadeUp 0.8s 0.2s ease both;
+        }
+
+        .hero-meta {
+            font-size: 0.8rem;
+            color: #555;
+            letter-spacing: 1px;
+            margin-bottom: 48px;
+            animation: fadeUp 0.8s 0.3s ease both;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeUp 0.8s 0.4s ease both;
+        }
+
+        .btn-primary {
+            padding: 14px 32px;
+            background: linear-gradient(90deg, #005851, #001a33);
+            border: 1px solid var(--teal);
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px var(--teal-dim);
+        }
+        .btn-primary:hover {
+            background: var(--teal);
+            color: #060614;
+            box-shadow: 0 0 40px var(--teal-glow);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            padding: 14px 32px;
+            background: transparent;
+            border: 1px solid #333;
+            color: var(--text-muted);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            border-color: var(--teal);
+            color: var(--teal);
+            transform: translateY(-2px);
+        }
+
+        /* ── SCROLL HINT ── */
+        .scroll-hint {
+            position: relative; z-index: 2;
+            margin-top: 60px;
+            animation: fadeUp 1s 0.8s ease both;
+        }
+        .scroll-hint span {
+            display: block;
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            color: #444;
+            margin-bottom: 10px;
+        }
+        .scroll-arrow {
+            width: 1px; height: 50px;
+            background: linear-gradient(to bottom, var(--teal), transparent);
+            margin: 0 auto;
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.4; transform: scaleY(1); }
+            50% { opacity: 1; transform: scaleY(1.1); }
+        }
+
+        /* ── STATS ROW ── */
+        .stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            background: var(--bg-card);
+        }
+        .stat {
+            flex: 1;
+            max-width: 220px;
+            padding: 32px 20px;
+            text-align: center;
+            border-right: 1px solid var(--border);
+            transition: background 0.3s;
+        }
+        .stat:last-child { border-right: none; }
+        .stat:hover { background: var(--teal-dim); }
+        .stat-number {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 2rem;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+        }
+        .stat-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+
+        /* ── SECTION ── */
+        section { padding: 100px 40px; max-width: 1100px; margin: 0 auto; }
+
+        .section-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--teal);
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            line-height: 1.1;
+        }
+
+        .section-desc {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.7;
+            max-width: 600px;
+            margin-bottom: 56px;
+        }
+
+        /* ── CHAPTER CARDS ── */
+        .chapters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .chapter-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chapter-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: var(--gradient-main);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .chapter-card:hover {
+            border-color: var(--teal);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,197,181,0.12);
+        }
+
+        .chapter-card:hover::before { transform: scaleX(1); }
+
+        .chapter-num {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            color: var(--teal);
+            opacity: 0.6;
+        }
+
+        .chapter-icon {
+            font-size: 2rem;
+            line-height: 1;
+        }
+
+        .chapter-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.05rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            line-height: 1.3;
+        }
+
+        .chapter-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .chapter-arrow {
+            font-size: 0.8rem;
+            color: var(--teal);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+            opacity: 0;
+            transform: translateX(-8px);
+            transition: all 0.3s ease;
+        }
+
+        .chapter-card:hover .chapter-arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* FEATURED card - spans 2 cols */
+        .chapter-card.featured {
+            grid-column: span 2;
+            flex-direction: row;
+            align-items: flex-start;
+            gap: 32px;
+            background: linear-gradient(135deg, #0a1a20 0%, #0f0f1a 100%);
+        }
+        @media (max-width: 700px) {
+            .chapter-card.featured { grid-column: span 1; flex-direction: column; }
+        }
+        .chapter-card.featured .chapter-icon { font-size: 3.5rem; }
+
+        /* ── PROBLEM STATEMENT ── */
+        .problemfrage {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--teal);
+            border-radius: 12px;
+            padding: 48px;
+            margin: 0 40px 80px;
+            max-width: 1020px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            overflow: hidden;
+        }
+        .problemfrage::after {
+            content: '"';
+            position: absolute;
+            right: 30px; top: 10px;
+            font-size: 8rem;
+            color: var(--teal);
+            opacity: 0.06;
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+        .problemfrage-label {
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--teal);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        .problemfrage p {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            font-weight: 700;
+            line-height: 1.5;
+            color: #e0e0e0;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            text-align: center;
+            padding: 60px 40px;
+            border-top: 1px solid var(--border);
+            color: #333;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+        footer span { color: var(--teal); }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Stagger children */
+        .chapters-grid .chapter-card { transition-delay: calc(var(--i, 0) * 80ms); }
+
+        hr.divider-line {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav class="topbar">
+        <div class="divider"></div>
+        <a href="facharbeit.html" class="passive">START</a>
+        <a href="impressum.html" class="passive">IMPRESSUM</a>
+        <a href="datenschutz.html" class="passive">DATENSCHUTZ</a>
+        <a href="quellen.html" class="passive">QUELLEN</a>
+    </nav>
+
+    <!-- HERO -->
+    <div class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">Seminarfacharbeit 2026</div>
+            <h1>Wo liegen die<br>Grenzen der KI?</h1>
+            <p class="hero-subtitle">
+                Denken, Kreativität und Problemlösung –<br>
+                Mensch vs. Maschine im direkten Vergleich.
+            </p>
+            <p class="hero-meta">Waldschule Hagen-Beverstedt &nbsp;·&nbsp; natürlich / künstlich &nbsp;·&nbsp; 2026</p>
+            <div class="hero-cta">
+                <a href="#kapitel" class="btn-primary">Zur Arbeit →</a>
+                <a href="facharbeit-einleitung.html" class="btn-secondary">Einleitung lesen</a>
+            </div>
+        </div>
+        <div class="scroll-hint">
+            <span>SCROLLEN</span>
+            <div class="scroll-arrow"></div>
+        </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats-row">
+        <div class="stat">
+            <span class="stat-number">9</span>
+            <span class="stat-label">Kapitel</span>
+        </div>
+        <div class="stat">
+            <span class="stat-number">18</span>
+            <span class="stat-label">Quellen</span>
+        </div>
+        <div class="stat">
+            <span class="stat-number">3</span>
+            <span class="stat-label">Kernbereiche</span>
+        </div>
+        <div class="stat">
+            <span class="stat-number">KI</span>
+            <span class="stat-label">Thema</span>
+        </div>
+    </div>
+
+    <!-- PROBLEMFRAGE -->
+    <div class="problemfrage reveal">
+        <div class="problemfrage-label">Problemfrage der Arbeit</div>
+        <p>Wo liegen die Grenzen künstlicher Intelligenz im Hinblick auf Denken, Kreativität und Problemlösung im Vergleich zum Menschen?</p>
+    </div>
+
+    <!-- KAPITEL -->
+    <section id="kapitel">
+        <div class="section-label">Inhaltsverzeichnis</div>
+        <h2 class="section-title reveal">Alle Kapitel<br>im Überblick.</h2>
+        <p class="section-desc reveal">Klicke auf ein Kapitel, um direkt dorthin zu springen. Die Arbeit ist in Grundlagen, Kernanalyse und Praxisteil gegliedert.</p>
+
+        <div class="chapters-grid">
+
+            <!-- Einleitung – featured -->
+            <a href="facharbeit-einleitung.html" class="chapter-card featured reveal" style="--i:0">
+                <div>
+                    <div class="chapter-icon">🧠</div>
+                </div>
+                <div>
+                    <div class="chapter-num">Kapitel 1</div>
+                    <div class="chapter-title">Einleitung</div>
+                    <div class="chapter-desc">Von automatisierten Übersetzungen bis zur Musikgenerierung – KI revolutioniert unsere Zeit. Doch wo sind ihre Grenzen? Diese Arbeit untersucht die Frage systematisch in drei Kernbereichen.</div>
+                    <div class="chapter-arrow">→ LESEN</div>
+                </div>
+            </a>
+
+            <a href="facharbeit-definitionen.html" class="chapter-card reveal" style="--i:1">
+                <div class="chapter-num">Kapitel 2</div>
+                <div class="chapter-icon">📖</div>
+                <div class="chapter-title">Definitionen</div>
+                <div class="chapter-desc">Künstliche Intelligenz, Machine Learning, Neuronale Netzwerke – die wichtigsten Begriffe klar erklärt.</div>
+                <div class="chapter-arrow">→ LESEN</div>
+            </a>
+
+            <a href="facharbeit-geschichte.html" class="chapter-card reveal" style="--i:2">
+                <div class="chapter-num">Kapitel 3</div>
+                <div class="chapter-icon">🕰️</div>
+                <div class="chapter-title">Geschichtliche Hintergründe</div>
+                <div class="chapter-desc">Von Alan Turings „Können Maschinen denken?" bis zum Deep-Learning-Durchbruch 2012. Die Evolution der KI.</div>
+                <div class="chapter-arrow">→ LESEN</div>
+            </a>
+
+            <a href="facharbeit-denken.html" class="chapter-card reveal" style="--i:3">
+                <div class="chapter-num">Kapitel 4</div>
+                <div class="chapter-icon">⚡</div>
+                <div class="chapter-title">Denkprozess – Mensch vs. Maschine</div>
+                <div class="chapter-desc">Emotion, Unterbewusstsein, Heuristiken – was menschliches Denken von statistischer Wahrscheinlichkeitsrechnung unterscheidet.</div>
+                <div class="chapter-arrow">→ LESEN</div>
+            </a>
+
+            <a href="facharbeit-kreativitaet.html" class="chapter-card reveal" style="--i:4">
+                <div class="chapter-num">Kapitel 5</div>
+                <div class="chapter-icon">🎨</div>
+                <div class="chapter-title">Kreativität einer KI</div>
+                <div class="chapter-desc">Deep Dream, DALL-E, Beethovens 10. Symphonie – kann eine Maschine wirklich kreativ sein?</div>
+                <div class="chapter-arrow">→ LESEN</div>
+            </a>
+
+            <a href="facharbeit-problemloesung.html" class="chapter-card reveal" style="--i:5">
+                <div class="chapter-num">Kapitel 6</div>
+                <div class="chapter-icon">🔧</div>
+                <div class="chapter-title">Problemlösung & Entscheidungsfindung</div>
+                <div class="chapter-desc">Effizienz vs. Kontextverständnis. Wie KI-Agenten Probleme lösen – und wo sie scheitern.</div>
+                <div class="chapter-arrow">→ LESEN</div>
+            </a>
+
+            <a href="facharbeit-openclaw.html" class="chapter-card reveal" style="--i:6">
+                <div class="chapter-num">Kapitel 7</div>
+                <div class="chapter-icon">🤖</div>
+                <div class="chapter-title">OpenClaw – KI übernimmt den Computer</div>
+                <div class="chapter-desc">Vom Chatbot zum System-Agenten: OpenClaw zeigt, wie KI komplette Rechner autonom steuern kann – und welche Risiken das birgt.</div>
+                <div class="chapter-arrow">→ LESEN</div>
+            </a>
+
+            <a href="facharbeit-halluzinationen.html" class="chapter-card reveal" style="--i:7">
+                <div class="chapter-num">Kapitel 8</div>
+                <div class="chapter-icon">👻</div>
+                <div class="chapter-title">Das Halluzinationsproblem</div>
+                <div class="chapter-desc">Warum KI „überzeugend lügt" – und warum Sycophancy ein gefährlicher Systemfehler ist.</div>
+                <div class="chapter-arrow">→ LESEN</div>
+            </a>
+
+            <a href="facharbeit-autonomes-fahren.html" class="chapter-card reveal" style="--i:8">
+                <div class="chapter-num">Kapitel 9</div>
+                <div class="chapter-icon">🚗</div>
+                <div class="chapter-title">Autonomes Fahren & Ethik</div>
+                <div class="chapter-desc">Moralische Dilemmas im Algorithmus – wer entscheidet, wenn ein Unfall unvermeidlich ist?</div>
+                <div class="chapter-arrow">→ LESEN</div>
+            </a>
+
+            <!-- Fazit – featured -->
+            <a href="facharbeit-fazit.html" class="chapter-card featured reveal" style="--i:9">
+                <div>
+                    <div class="chapter-icon">✅</div>
+                </div>
+                <div>
+                    <div class="chapter-num">Kapitel 10</div>
+                    <div class="chapter-title">Fazit & Ausblick</div>
+                    <div class="chapter-desc">Die wichtigste Erkenntnis: Die KI ist ein mächtiges Werkzeug – aber kein autonomer Entscheidungsträger. Was das für die Zukunft bedeutet und warum kritische Reflexion die wichtigste menschliche Fähigkeit bleibt.</div>
+                    <div class="chapter-arrow">→ LESEN</div>
+                </div>
+            </a>
+
+        </div>
+    </section>
+
+    <hr class="divider-line">
+
+    <footer>
+        <p>&copy; <span id="jahr"></span> CoreBuilds Systems &nbsp;·&nbsp; <span>Seminarfacharbeit</span> – Informatik &amp; Gesellschaft</p>
+    </footer>
+
+    <script>
+        document.getElementById("jahr").textContent = new Date().getFullYear();
+
+        // Intersection Observer for reveal animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>

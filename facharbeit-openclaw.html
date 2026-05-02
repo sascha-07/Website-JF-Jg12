@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenClaw | Facharbeit KI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --teal: #00c5b5;
+            --teal-dim: rgba(0,197,181,0.12);
+            --teal-glow: rgba(0,197,181,0.4);
+            --bg: #0b0b0b;
+            --bg-card: #0f0f1a;
+            --border: rgba(0,197,181,0.18);
+            --text: #ffffff;
+            --muted: #999;
+            --gradient: linear-gradient(90deg,#00c5b5,#0077ff);
+        }
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{background:var(--bg);font-family:'Inter',sans-serif;color:var(--text);overflow-x:hidden;}
+
+        /* TOPBAR */
+        nav.topbar{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;padding:0 24px;height:54px;background:rgba(6,6,20,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+        nav.topbar a{color:var(--muted);text-decoration:none;font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.65rem;letter-spacing:1.5px;padding:5px 12px;border-radius:4px;transition:all 0.2s;}
+        nav.topbar a:hover{color:var(--teal);background:var(--teal-dim);}
+        nav.topbar .divider{width:1px;height:18px;background:var(--border);margin:0 10px;}
+
+        /* CHAPTER HEADER */
+        .ch-header{padding:130px 40px 40px;max-width:860px;margin:0 auto;text-align: left;}
+        .ch-num{font-family:'Montserrat',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:3px;color:var(--teal);margin-bottom:14px;}
+        .ch-title{font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(2rem,5vw,3.8rem);text-transform:uppercase;line-height:1.05;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:20px;}
+        .ch-lead{font-size:1.1rem;color:var(--muted);line-height:1.7;max-width:700px;}
+
+        /* VIDEO CONTAINER */
+        .video-section { max-width: 800px; margin: 20px auto 60px; padding: 0 40px; }
+        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+
+        /* CONTENT */
+        .divline{border:none;border-top:1px solid var(--border);margin:0 40px;}
+        .content{max-width:800px;margin:0 auto;padding:60px 40px 80px;}
+        .content h2{font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.4rem;text-transform:uppercase;letter-spacing:0.5px;margin:52px 0 16px;color:var(--text);}
+        .content p{color:#ccc;line-height:1.85;margin-bottom:18px;font-size:1rem;}
+        .content strong{color:var(--text);}
+
+        /* HIGHLIGHT & CARDS */
+        .highlight{background:var(--bg-card);border:1px solid var(--border);border-left:3px solid var(--teal);border-radius:10px;padding:28px 32px;margin:32px 0;}
+        .info-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin:32px 0;}
+        .info-card{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:24px;transition:all 0.3s;}
+        .info-card:hover{border-color:var(--teal);transform:translateY(-3px);}
+        .info-card h3{font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.85rem;text-transform:uppercase;color:var(--teal);margin-bottom:8px;}
+
+        /* TABLE */
+        .compare{width:100%;border-collapse:collapse;margin:32px 0;}
+        .compare th{font-family:'Montserrat',sans-serif;font-size:0.75rem;font-weight:700;padding:14px 20px;border-bottom:2px solid var(--border);text-align:left;}
+        .compare td{padding:14px 20px;border-bottom:1px solid var(--border);font-size:0.9rem;color:#ccc;line-height:1.6;}
+        .compare tr:hover td{background:var(--teal-dim);}
+
+        /* NAV BUTTONS */
+        .ch-nav{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;padding:40px;border-top:1px solid var(--border);max-width:880px;margin:0 auto;}
+        .ch-nav a{font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.75rem;letter-spacing:2px;text-decoration:none;padding:12px 24px;border-radius:8px;transition:all 0.3s;}
+        .nav-back{color:var(--muted);border:1px solid #333;}
+        .nav-back:hover{border-color:var(--teal);color:var(--teal);}
+        .nav-next{background:linear-gradient(90deg,#005851,#001a33);border:1px solid var(--teal);color:white;}
+        .nav-next:hover{background:var(--teal);color:#060614;box-shadow:0 0 24px var(--teal-glow);}
+        .nav-home{color:var(--muted);font-size:0.7rem;text-align:center;}
+        .nav-home a{color:var(--teal);text-decoration:none;}
+
+        footer{text-align:center;padding:50px 40px;color:#444;font-size:0.75rem;}
+
+        /* REVEAL */
+        .reveal{opacity:0;transform:translateY(20px);transition:all 0.8s ease-out;}
+        .reveal.visible{opacity:1;transform:translateY(0);}
+    </style>
+</head>
+<body>
+
+    <nav class="topbar">
+        <a href="facharbeit.html">START</a>
+        <div class="divider"></div>
+        <a href="impressum.html">IMPRESSUM</a>
+        <a href="datenschutz.html">DATENSCHUTZ</a>
+        <a href="quellen.html">QUELLEN</a>
+    </nav>
+
+    <header class="ch-header">
+        <div class="ch-num">Kapitel 7</div>
+        <h1 class="ch-title">OpenClaw – KI übernimmt den Computer</h1>
+        <p class="ch-lead">Vom Chatbot zum System-Agenten: OpenClaw zeigt, wie KI ganze Betriebssysteme autonom steuern kann – und welche Risiken das birgt.</p>
+    </header>
+
+    <section class="video-section">
+        <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/ps7kqEXkwEs" title="OpenClaw Video" allowfullscreen></iframe>
+        </div>
+    </section>
+
+    <hr class="divline">
+
+    <div class="content">
+        <p class="reveal">Das Projekt <strong>OpenClaw</strong> stellt einen Neubeginn in der Mensch-Maschine-Interaktion dar. Während bisherige KIs wie ChatGPT oder Gemini primär als Textgeneratoren fungieren, markiert OpenClaw den Übergang zum <strong>„agentiellen Computing"</strong>.</p>
+
+        <div class="highlight reveal">
+            <p>OpenClaw erhält <strong>systemweiten Zugriff</strong> – inklusive Dateiverwaltung und Installation von Software. Der Wandel: vom Chatbot zum autonomen Agenten.</p>
+        </div>
+
+        <h2>7.1 Bewertung des Schöpfungsvorgangs</h2>
+        <p class="reveal">In der wissenschaftlichen Einordnung lässt sich OpenClaw als Beispiel für <strong>kombinatorische Kreativität</strong> identifizieren.</p>
+
+        <div class="info-grid">
+            <div class="info-card reveal">
+                <h3>Autonome Problemlösung</h3>
+                <p>Erkennt fehlende Abhängigkeiten und installiert diese eigenständig nach.</p>
+            </div>
+            <div class="info-card reveal">
+                <h3>Selbstmodifikation</h3>
+                <p>Optimiert die eigene Konfiguration durch Umschreiben von Skripten.</p>
+            </div>
+            <div class="info-card reveal">
+                <h3>Wahrscheinlichkeit</h3>
+                <p>Operiert ohne echtes Verständnis, rein auf Basis statistischer Muster.</p>
+            </div>
+        </div>
+
+        <h2>7.2 Chancen und Risiken</h2>
+        <table class="compare reveal">
+            <thead>
+                <tr>
+                    <th>Aspekt</th>
+                    <th>⚠️ Risiko</th>
+                    <th>✅ Chance</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Systemzugriff</td>
+                    <td>Kontrollverlust</td>
+                    <td>Barrierefreiheit für Laien</td>
+                </tr>
+                <tr>
+                    <td>Sicherheit</td>
+                    <td>Prompt Injection</td>
+                    <td>Automatisierung</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+<div class="ch-nav">
+    <a href="facharbeit-problemloesung.html" class="ch-nav nav-back">← Problemlösung</a>
+    <div class="nav-home"><a href="facharbeit.html">↑ Übersicht</a></div>
+    <a href="facharbeit-halluzinationen.html" class="ch-nav nav-next">Halluzinationen →</a>
+</div>
+
+    <footer>
+        <p>&copy; <span id="year"></span> CoreBuilds Systems · Seminarfacharbeit</p>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+        const obs = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    </script>
+</body>
+</html>

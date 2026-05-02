@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Definitionen | Facharbeit KI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --teal: #00c5b5;
+            --teal-dim: rgba(0,197,181,0.12);
+            --teal-glow: rgba(0,197,181,0.4);
+            --bg: #0b0b0b;
+            --bg-card: #0f0f1a;
+            --border: rgba(0,197,181,0.18);
+            --text: #ffffff;
+            --muted: #999;
+            --gradient: linear-gradient(90deg,#00c5b5,#0077ff);
+        }
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{background:var(--bg);font-family:'Inter',sans-serif;color:var(--text);overflow-x:hidden;}
+
+        /* TOPBAR */
+        nav.topbar{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;gap:4px;padding:0 24px;height:54px;background:rgba(6,6,20,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);flex-wrap:wrap;}
+        nav.topbar a{color:var(--muted);text-decoration:none;font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.65rem;letter-spacing:1.5px;padding:5px 9px;border-radius:4px;transition:color 0.2s,background 0.2s;}
+        nav.topbar a:hover{color:var(--teal);background:var(--teal-dim);}
+        nav.topbar a.active{color:var(--teal);}
+        nav.topbar .div{width:1px;height:18px;background:var(--border);margin:0 4px;}
+
+        /* CHAPTER HEADER */
+        .ch-header{padding:130px 40px 60px;max-width:860px;margin:0 auto;}
+        .ch-num{font-family:'Montserrat',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:3px;color:var(--teal);margin-bottom:14px;}
+        .ch-title{font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(2rem,5vw,3.8rem);text-transform:uppercase;line-height:1.05;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:20px;}
+        .ch-lead{font-size:1.1rem;color:var(--muted);line-height:1.7;max-width:700px;}
+
+        /* DIVIDER */
+        .divline{border:none;border-top:1px solid var(--border);margin:0 40px;}
+
+        /* CONTENT */
+        .content{max-width:800px;margin:0 auto;padding:60px 40px 80px;}
+        .content h2{font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.4rem;text-transform:uppercase;letter-spacing:0.5px;margin:52px 0 16px;color:var(--text);}
+        .content h2:first-child{margin-top:0;}
+        .content p{color:#ccc;line-height:1.85;margin-bottom:18px;font-size:1rem;}
+        .content strong{color:var(--text);}
+
+        /* HIGHLIGHT BOX */
+        .highlight{background:var(--bg-card);border:1px solid var(--border);border-left:3px solid var(--teal);border-radius:10px;padding:28px 32px;margin:32px 0;}
+        .highlight p{margin:0;color:#ddd;}
+
+        /* INFO CARDS */
+        .info-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin:32px 0;}
+        .info-card{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:24px;transition:border-color 0.3s,transform 0.3s;}
+        .info-card:hover{border-color:var(--teal);transform:translateY(-3px);}
+        .info-card .ic-icon{font-size:1.8rem;margin-bottom:12px;}
+        .info-card h3{font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.85rem;text-transform:uppercase;letter-spacing:1px;color:var(--teal);margin-bottom:8px;}
+        .info-card p{font-size:0.88rem;color:var(--muted);margin:0;line-height:1.6;}
+
+        /* TIMELINE */
+        .timeline{position:relative;padding-left:28px;margin:32px 0;}
+        .timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:var(--border);}
+        .tl-item{position:relative;margin-bottom:36px;}
+        .tl-item::before{content:'';position:absolute;left:-34px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--teal);box-shadow:0 0 12px var(--teal-glow);}
+        .tl-year{font-family:'Montserrat',sans-serif;font-size:0.7rem;font-weight:700;letter-spacing:2px;color:var(--teal);margin-bottom:4px;}
+        .tl-text{color:#ccc;font-size:0.95rem;line-height:1.7;}
+        .tl-text strong{color:var(--text);}
+
+        /* COMPARE TABLE */
+        .compare{width:100%;border-collapse:collapse;margin:32px 0;}
+        .compare th{font-family:'Montserrat',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:14px 20px;border-bottom:2px solid var(--border);text-align:left;}
+        .compare th:first-child{color:var(--muted);}
+        .compare th:nth-child(2){color:#ffa500;}
+        .compare th:nth-child(3){color:var(--teal);}
+        .compare td{padding:14px 20px;border-bottom:1px solid var(--border);font-size:0.9rem;color:#ccc;vertical-align:top;line-height:1.6;}
+        .compare td:nth-child(2){color:#ffcc80;}
+        .compare td:nth-child(3){color:#b2f0ea;}
+        .compare tr:hover td{background:var(--teal-dim);}
+
+        /* NAV BUTTONS */
+        .ch-nav{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;padding:40px;border-top:1px solid var(--border);max-width:880px;margin:0 auto;}
+        .ch-nav a{font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.75rem;letter-spacing:2px;text-decoration:none;padding:12px 24px;border-radius:8px;transition:all 0.3s;}
+        .nav-back{color:var(--muted);border:1px solid #333;}
+        .nav-back:hover{border-color:var(--teal);color:var(--teal);}
+        .nav-next{background:linear-gradient(90deg,#005851,#001a33);border:1px solid var(--teal);color:white;}
+        .nav-next:hover{background:var(--teal);color:#060614;box-shadow:0 0 24px var(--teal-glow);}
+        .nav-home{color:var(--muted);font-size:0.7rem;text-align:center;}
+        .nav-home a{color:var(--teal);text-decoration:none;}
+
+        footer{text-align:center;padding:50px 40px;color:#333;font-size:0.75rem;letter-spacing:1px;}
+
+        /* REVEAL */
+        .reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease;}
+        .reveal.visible{opacity:1;transform:translateY(0);}
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav class="topbar">
+        <div class="divider"></div>
+        <a href="facharbeit.html" class="passive">START</a>
+        <a href="impressum.html" class="passive">IMPRESSUM</a>
+        <a href="datenschutz.html" class="passive">DATENSCHUTZ</a>
+        <a href="quellen.html" class="passive">QUELLEN</a>
+    </nav>
+
+<div class="ch-header">
+    <div class="ch-num">Kapitel 2</div>
+    <h1 class="ch-title">Definitionen</h1>
+    <p class="ch-lead">Klare Begriffe als Grundlage: Was bedeuten KI, Machine Learning und neuronale Netzwerke wirklich?</p>
+</div>
+<hr class="divline">
+
+<div class="content">
+<p class="reveal">Im Folgenden werden zentrale Begriffe definiert, um Missverständnissen vorzubeugen und eine klare Grundlage für die weitere Analyse zu schaffen.</p>
+
+<h2>2.1 Der Begriff „Künstlich"</h2>
+<p class="reveal">Das Adjektiv <strong>„künstlich"</strong> bezeichnet etwas, das von Menschen erzeugt wurde und nicht natürlich entstanden ist. Es bildet den ersten Bestandteil des Begriffs, den diese Arbeit zentral untersucht.</p>
+
+<h2>2.2 Künstliche Intelligenz</h2>
+<div class="highlight reveal">
+<p>„Künstliche Intelligenz (KI) beschäftigt sich mit Methoden, die es einem Computer ermöglichen, solche Aufgaben zu lösen, die, wenn sie vom Menschen gelöst werden, Intelligenz erfordern." <br><span style="color:var(--muted);font-size:0.8rem">– Gabler Wirtschaftslexikon</span></p>
+</div>
+
+<h2>2.3 Intelligenz als genereller Begriff</h2>
+<p class="reveal">Intelligenz ist ein komplexes Schema, das die Begabung beschreibt, komplexe Informationen zu verstehen, nachzudenken und Entscheidungen zu treffen. Dazu gehören Denkprozesse wie Wahrnehmung, Lernen, Erinnern, Problemlösen und kritisches Denken. Sie wird von genetischen Faktoren und der Umwelt beeinflusst und kann durch Bildung, Erfahrung oder Training weiter ausgebaut werden.</p>
+<p class="reveal">Es gibt verschiedene Modelle und Methoden, um Intelligenz zu messen – beispielsweise der IQ-Test oder das Multiple-Intelligenzen-Modell.</p>
+
+<h2>2.4 Denken</h2>
+<p class="reveal">Das Denken ist ein psychischer Vorgang, der zur Informationsverarbeitung dient. Dabei werden innere Vorstellungen bzw. gedankliche Modelle von Problemsituationen verändert, um Situationen besser zu verstehen und Probleme zu lösen. Denken wird manchmal auch als „Testhandeln" bezeichnet.</p>
+
+<div class="info-grid">
+  <div class="info-card reveal">
+    <div class="ic-icon">🌊</div>
+    <h3>Divergentes Denken</h3>
+    <p>Frei, wenig kontrolliert. Sucht neue Verbindungen zwischen Informationsquellen. Basis für Kreativität.</p>
+  </div>
+  <div class="info-card reveal">
+    <div class="ic-icon">🎯</div>
+    <h3>Konvergentes Denken</h3>
+    <p>Regelkonform, kontrolliert. Zieht logische Schlüsse. Basis für analytisches Problemlösen.</p>
+  </div>
+</div>
+
+<h2>2.5 Machine Learning</h2>
+<p class="reveal">Maschinelles Lernen bezieht sich auf einen Teil der künstlichen Intelligenz. Das Ziel ist, den Computer so zu trainieren, dass er aus Daten und Erfahrungen lernt – ohne dass jede Reaktion vorher explizit programmiert werden muss. Das maschinelle Lernen beruht auf Algorithmen, die darauf ausgelegt sind, Muster und Zusammenhänge in großen Datensätzen zu erkennen und daraus passende Entscheidungen oder Vorhersagen zu treffen.</p>
+<p class="reveal">Solche Systeme werden im Laufe der Nutzung immer genauer, da immer mehr Daten verfügbar sind.</p>
+
+<h2>2.6 Neuronale Netzwerke</h2>
+<div class="highlight reveal">
+<p>„Ein neuronales Netz ist ein Programm oder Modell des maschinellen Lernens. Es trifft Entscheidungen auf ähnliche Weise wie das menschliche Gehirn: Seine Prozesse ahmen nach, wie biologische Neuronen zusammenwirken, um Phänomene zu identifizieren, Optionen abzuwägen und Schlussfolgerungen zu ziehen." <br><span style="color:var(--muted);font-size:0.8rem">– IBM Deutschland GmbH</span></p>
+</div>
+</div>
+
+<div class="ch-nav">
+    <a href="facharbeit-einleitung.html" class="ch-nav nav-back">← Einleitung</a>
+    <div class="nav-home"><a href="facharbeit.html">↑ Übersicht</a></div>
+    <a href="facharbeit-geschichte.html" class="ch-nav nav-next">Geschichte →</a>
+</div>
+<footer><p>&copy; <span id="j"></span> CoreBuilds Systems · Seminarfacharbeit</p></footer>
+<script>
+document.getElementById('j').textContent=new Date().getFullYear();
+const obs=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('visible')),{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body></html>
