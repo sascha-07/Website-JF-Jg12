@@ -106,6 +106,24 @@
             text-transform: uppercase; /* Passt oft gut zum weiten Letter-Spacing */
         }
 
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            animation: fadeUp 1s 0.3s ease both;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 800px; /* Begrenzt die Bildgröße */
+            height: auto;
+            filter: drop-shadow(0 0 30px var(--teal-glow));
+            /* Kleiner Floating-Effekt */
+            animation: float 6s ease-in-out infinite;
+            border-radius: 5%;
+            margin-top: 5%;
+        }
+
         /* REVEAL */
         .reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease;}
         .reveal.visible{opacity:1;transform:translateY(0);}
@@ -114,15 +132,18 @@
 <body>
     <!-- NAVIGATION -->
     <nav class="topbar">
-        <a href="index.html" class="active">START</a>
+        <a href="index.html" class="passive">START</a>
         <div class="div"></div>
         <a href="Facharbeit.pdf" class="passive">DOWNLOAD</a>
+        <div class="div"></div>
+        <a href="quiz.html" class="passive">QUIZ</a>
         <div class="div"></div>
         <a href="impressum.html" class="passive">IMPRESSUM</a>
         <div class="div"></div>
         <a href="datenschutz.html" class="passive">DATENSCHUTZ</a>
         <div class="div"></div>
         <a href="quellen.html" class="passive">QUELLEN</a>
+
 
     </nav>
 
@@ -139,6 +160,9 @@
 <h2>Verschiebung der Verantwortung</h2>
 <p class="reveal">Während bei automatisierten Systemen der Mensch als Sicherheitswächter in der Pflicht bleibt, geben Nutzer bei vollautomatisierten Fahrzeugen der <strong>Stufe 5</strong> die Kontrolle vollständig ab. Dies verlagert die Verantwortung weg vom Fahrer hin zu den Herstellern und Softwareentwicklern, die das Fahrzeug für alle Eventualitäten programmieren müssen.</p>
 
+<div class="hero-image">
+    <img src="/Bilder/falco-vehicle-4759347.jpg" alt="KI vs Mensch">
+</div>
 <div class="highlight reveal">
 <p><strong>Klassisches moralisches Dilemma:</strong> Wie soll sich ein Algorithmus verhalten, wenn ein Unfall unvermeidlich ist? Da Maschinen im Gegensatz zum Menschen nicht spontan, sondern auf Basis einer vorherigen Programmierung entscheiden, müssen ethische Regeln explizit in den Code integriert werden.</p>
 </div>

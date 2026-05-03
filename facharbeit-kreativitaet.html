@@ -106,6 +106,21 @@
             text-transform: uppercase; /* Passt oft gut zum weiten Letter-Spacing */
         }
 
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            animation: fadeUp 1s 0.3s ease both;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 850px; /* Begrenzt die Bildgröße */
+            height: auto;
+            filter: drop-shadow(0 0 30px var(--teal-glow));
+            /* Kleiner Floating-Effekt */
+            animation: float 6s ease-in-out infinite;
+        }
         /* REVEAL */
         .reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease;}
         .reveal.visible{opacity:1;transform:translateY(0);}
@@ -114,15 +129,18 @@
 <body>
     <!-- NAVIGATION -->
     <nav class="topbar">
-        <a href="index.html" class="active">START</a>
+        <a href="index.html" class="passive">START</a>
         <div class="div"></div>
         <a href="Facharbeit.pdf" class="passive">DOWNLOAD</a>
+        <div class="div"></div>
+        <a href="quiz.html" class="passive">QUIZ</a>
         <div class="div"></div>
         <a href="impressum.html" class="passive">IMPRESSUM</a>
         <div class="div"></div>
         <a href="datenschutz.html" class="passive">DATENSCHUTZ</a>
         <div class="div"></div>
         <a href="quellen.html" class="passive">QUELLEN</a>
+
 
     </nav>
 
