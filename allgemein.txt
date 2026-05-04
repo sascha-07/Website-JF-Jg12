@@ -1,1 +1,8 @@
 Domain: https://ki-grenzen.de
+
+
+Aufgaben - ToDos:
+
+1. quellen.html zuende
+
+2. Datenschutzerklärungswebsite - bei 150% nur nach scrollen sichtbar
