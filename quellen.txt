@@ -1,3 +1,53 @@
 Quellen für die Facharbeit:
 
-https://pixabay.com/photos/vehicle-autonomous-4759347/
+https://pixabay.com/photos/vehicle-autonomous-4759347/ (Bild)
+CONET ISB GmbH (Hrsg.): „Die Evolution der Künstlichen Intelligenz“, unter: https://www.conet-isb.de/de/online-kundenzeitschrift/detail/die-evolution-der-kuenstlichen-intelligenz, Stand: 31.10.2025.
+c’t 3003 (Hrsg.): „OpenClaw: Ja, der Hype ist gerechtfertigt“, unter: https://www.youtube.com/watch?v=ps7kqEXkwEs, Stand: 15.03.2026.
+Danilyuk, Pavel: „Mann-Technologie-Schach-Strategie“, unter: https://www.pexels.com/de-de/foto/mann-technologie-schach-strategie-8438923, Stand: 02.11.2025.
+Gabler Wirtschaftslexikon (Hrsg.): „Definition: Was ist Denken?“, unter: https://wirtschaftslexikon.gabler.de/definition/denken-28257/version-251892, Stand: 16.10.2025.
+Gabler Wirtschaftslexikon (Hrsg.): „Künstliche Intelligenz (KI)“, unter: https://wirtschaftslexikon.gabler.de/definition/kuenstliche-intelligenz-ki-40285, Stand: 20.09.2025.
+GeeksforGeeks (Hrsg.): „Problem Solving in Artificial Intelligence“, unter: https://www.geeksforgeeks.org/artificial-intelligence/problem-solving-in-artificial-intelligence, Stand: 01.11.2025.
+IBM (Hrsg.): „Was sind KI-Halluzinationen?“, unter: https://www.ibm.com/de-de/think/topics/ai-hallucinations, Stand: 15.03.2026.
+IBM Deutschland GmbH (Hrsg.): „Was sind neuronale Netzwerke?“, unter: https://www.ibm.com/de-de/think/topics/neural-networks, Stand: 18.10.2025.
+Landeszentrale für politische Bildung Baden-Württemberg (Hrsg.): „Autonomes Fahren“, unter: https://www.lpb-bw.de/autonomes-fahren, Stand: 15.03.2026.
+Langenscheidt KG (Hrsg.): Langenscheidts Großwörterbuch. Deutsch als Fremdsprache, „künstlich“, S. 588, Langenscheidt, Berlin/München, 1997.
+Laux, Lukas: „Künstliche Intelligenz in der Kunst“, unter: https://ki-campus.org/blog/ki-kreativitaet, Stand: 01.11.2025.
+NeuroNation (Hrsg.): „Intelligenz: Was ist das genau?“, unter: https://www.neuronation.com/science/de/definition-der-intelligenz-was-ist-das-eigentlich, Stand: 16.10.2025.
+SAP SE (Hrsg.): „Was ist Machine Learning? - Definition von Machine Learning im Detail“, unter: https://www.sap.com/germany/products/artificial-intelligence/what-is-machine-learning.html, Stand: 18.10.2025.
+Schneider, Florian: „Entscheidungsprozesse: Mensch vs. Maschine“, unter: https://mexxon.com/entscheidungsprozesse-mensch-vs-maschine, Stand: 31.10.2025.
+Voßberg, Tobias: „Neue Studie: Mehrheit der KI-Modelle spielt bei unsinnigen Rechtsfragen einfach mit“, unter: https://rsw.beck.de/aktuell/daily/meldung/detail/benchmark-studie-ai-ki-modelle-slop-halluzination-unsinnigen-rechtsfragen, Stand: 10.03.2026.
+
+
+Literatur- und Quellenverzeichnis
+
+c’t 3003 (Hrsg.): „OpenClaw: Ja, der Hype ist gerechtfertigt“, unter: https://www.youtube.com/watch?v=ps7kqEXkwEs, Stand: 15.03.2026.
+
+CONET ISB GmbH (Hrsg.): „Die Evolution der Künstlichen Intelligenz“, unter: https://www.conet-isb.de/de/online-kundenzeitschrift/detail/die-evolution-der-kuenstlichen-intelligenz, Stand: 31.10.2025.
+
+Danilyuk, Pavel: „Mann-Technologie-Schach-Strategie“, unter: https://www.pexels.com/de-de/foto/mann-technologie-schach-strategie-8438923, Stand: 02.11.2025.
+
+Gabler Wirtschaftslexikon (Hrsg.): „Definition: Was ist Denken?“, unter: https://wirtschaftslexikon.gabler.de/definition/denken-28257/version-251892, Stand: 16.10.2025.
+
+Gabler Wirtschaftslexikon (Hrsg.): „Künstliche Intelligenz (KI)“, unter: https://wirtschaftslexikon.gabler.de/definition/kuenstliche-intelligenz-ki-40285, Stand: 20.09.2025.
+
+GeeksforGeeks (Hrsg.): „Problem Solving in Artificial Intelligence“, unter: https://www.geeksforgeeks.org/artificial-intelligence/problem-solving-in-artificial-intelligence, Stand: 01.11.2025.
+
+IBM (Hrsg.): „Was sind KI-Halluzinationen?“, unter: https://www.ibm.com/de-de/think/topics/ai-hallucinations, Stand: 15.03.2026.
+
+IBM Deutschland GmbH (Hrsg.): „Was sind neuronale Netzwerke?“, unter: https://www.ibm.com/de-de/think/topics/neural-networks, Stand: 18.10.2025.
+
+Landeszentrale für politische Bildung Baden-Württemberg (Hrsg.): „Autonomes Fahren“, unter: https://www.lpb-bw.de/autonomes-fahren, Stand: 15.03.2026.
+
+Langenscheidt KG (Hrsg.): Langenscheidts Großwörterbuch. Deutsch als Fremdsprache, „künstlich“, S. 588, Langenscheidt, Berlin/München, 1997.
+
+Laux, Lukas: „Künstliche Intelligenz in der Kunst“, unter: https://ki-campus.org/blog/ki-kreativitaet, Stand: 01.11.2025.
+
+Metamorphoza: „Vehicle Autonomous“, unter: https://pixabay.com/photos/vehicle-autonomous-4759347/, Stand: 31.10.2025. (Ergänzt)
+
+NeuroNation (Hrsg.): „Intelligenz: Was ist das genau?“, unter: https://www.neuronation.com/science/de/definition-der-intelligenz-was-ist-das-eigentlich, Stand: 16.10.2025.
+
+SAP SE (Hrsg.): „Was ist Machine Learning? - Definition von Machine Learning im Detail“, unter: https://www.sap.com/germany/products/artificial-intelligence/what-is-machine-learning.html, Stand: 18.10.2025.
+
+Schneider, Florian: „Entscheidungsprozesse: Mensch vs. Maschine“, unter: https://mexxon.com/entscheidungsprozesse-mensch-vs-maschine, Stand: 31.10.2025.
+
+Voßberg, Tobias: „Neue Studie: Mehrheit der KI-Modelle spielt bei unsinnigen Rechtsfragen einfach mit“, unter: https://rsw.beck.de/aktuell/daily/meldung/detail/benchmark-studie-ai-ki-modelle-slop-halluzination-unsinnigen-rechtsfragen, Stand: 10.03.2026.

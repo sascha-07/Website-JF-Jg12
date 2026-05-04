@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Datenschutzerklärung | Facharbeit KI</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <style>
         :root {
             --teal: #00c5b5;
@@ -390,8 +391,11 @@
 
     <script>
         document.getElementById("jahr").textContent = new Date().getFullYear();
-        const obs=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('visible')),{threshold:0.05});
-        document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+         // Sofort alle bereits sichtbaren Elemente einblenden
+         document.querySelectorAll('.reveal').forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight) el.classList.add('visible');
+         });
     </script>
 
 </body>
