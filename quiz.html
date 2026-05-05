@@ -193,16 +193,20 @@
         footer { text-align: center; padding: 60px 40px; border-top: 1px solid var(--border); color: var(--teal); font-size: 0.8rem; letter-spacing: 1px; }
         footer p { display: flex; justify-content: center; gap: 10px; }
 
-        /* Reveal animation */
+        /* ── REVEAL (identisch zu anderen Seiten) ── */
         .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
         .reveal.visible { opacity: 1; transform: translateY(0); }
 
-        /* Slide transition */
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(30px); }
-            to   { opacity: 1; transform: translateX(0); }
+        /* Karten-Einblendung von unten (ersetzt slide-in) */
+        .q-card {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s;
         }
-        .slide-in { animation: slideIn 0.4s ease forwards; }
+        .q-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
@@ -211,8 +215,6 @@
     <nav class="topbar">
         <a href="index.html" class="passive">START</a>
         <div class="div"></div>
-        <a href="Facharbeit.pdf" class="passive">DOWNLOAD</a>
-        <div class="div"></div>
         <a href="quiz.html" class="active">QUIZ</a>
         <div class="div"></div>
         <a href="impressum.html" class="passive">IMPRESSUM</a>
@@ -220,8 +222,8 @@
         <a href="datenschutz.html" class="passive">DATENSCHUTZ</a>
         <div class="div"></div>
         <a href="quellen.html" class="passive">QUELLEN</a>
-
-
+        <div class="div"></div>
+        <a href="Facharbeit.pdf" class="passive" target="_blank">DOWNLOAD PDF</a>
     </nav>
 
 <div class="ch-header">
@@ -421,7 +423,7 @@ function renderQuestion() {
     `).join('');
 
     document.getElementById('quiz-area').innerHTML = `
-        <div class="q-card slide-in" id="q-card">
+        <div class="q-card" id="q-card">
             <div class="q-chapter">${q.chapter}</div>
             <div class="q-text">${q.q}</div>
             <div class="options">${optionsHTML}</div>
@@ -431,6 +433,14 @@ function renderQuestion() {
             </button>
         </div>
     `;
+
+    // Karte von unten einblenden – identisch zur reveal-Logik der anderen Seiten
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            const card = document.getElementById('q-card');
+            if (card) card.classList.add('visible');
+        });
+    });
 }
 
 function selectAnswer(idx) {
@@ -499,7 +509,7 @@ function showResult() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Init
+// Reveal-Observer für statische Elemente (Progress-Bar etc.)
 const obs = new IntersectionObserver(e => e.forEach(x => x.isIntersecting && x.target.classList.add('visible')), { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 

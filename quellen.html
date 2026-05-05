@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quellenverzeichnis | Facharbeit KI</title>
+    <title>Quiz – Was hast du gelernt? | Facharbeit KI</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <style>
@@ -18,8 +18,9 @@
             --muted: #999;
             --gradient: linear-gradient(90deg,#00c5b5,#0077ff);
         }
-        *{margin:0;padding:0;box-sizing:border-box;}
-        body{background:var(--bg);font-family:'Inter',sans-serif;color:var(--text);overflow-x:hidden;}
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: var(--bg); font-family: 'Inter', sans-serif; color: var(--text); overflow-x: hidden; }
 
         /* ── TOPBAR ── */
         nav.topbar{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;gap:4px;padding:0 24px;height:54px;background:rgba(6,6,20,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);flex-wrap:wrap;}
@@ -29,282 +30,232 @@
         nav.topbar .div{width:1px;height:18px;background:var(--border);margin:0 4px;}
 
         /* ── HEADER ── */
-        .ch-header{padding:130px 40px 60px;max-width:860px;margin:0 auto;}
-        .ch-num{font-family:'Montserrat',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:3px;color:var(--teal);margin-bottom:14px;}
-        .ch-title{font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(2rem,5vw,3.8rem);text-transform:uppercase;line-height:1.05;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:20px;}
-        .ch-lead{font-size:1.1rem;color:var(--muted);line-height:1.7;max-width:700px;}
-        .divline{border:none;border-top:1px solid var(--border);margin:0 40px;}
+        .ch-header { padding: 130px 40px 60px; max-width: 860px; margin: 0 auto; }
+        .ch-num { font-family: 'Montserrat', sans-serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 3px; color: var(--teal); margin-bottom: 14px; }
+        .ch-title { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: clamp(2rem,5vw,3.8rem); text-transform: uppercase; line-height: 1.05; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 20px; }
+        .ch-lead { font-size: 1.1rem; color: var(--muted); line-height: 1.7; max-width: 700px; }
+        .divline { border: none; border-top: 1px solid var(--border); margin: 0 40px; }
 
-        /* ── CONTENT ── */
-        .content{max-width:800px;margin:0 auto;padding:60px 40px 80px;}
+        /* ── QUIZ CONTAINER ── */
+        .quiz-wrap { max-width: 800px; margin: 0 auto; padding: 60px 40px 80px; }
 
-        .section-label {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.65rem;
-            font-weight: 700;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--teal);
-            margin-bottom: 20px;
-            margin-top: 52px;
-        }
-        .section-label:first-child { margin-top: 0; }
+        /* Progress bar */
+        .progress-row { display: flex; align-items: center; gap: 16px; margin-bottom: 40px; }
+        .progress-track { flex: 1; height: 4px; background: rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--gradient); border-radius: 2px; transition: width 0.5s ease; }
+        .progress-label { font-family: 'Montserrat', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; color: var(--muted); white-space: nowrap; }
 
-        /* ── SOURCE ENTRY ── */
-        .source-entry {
-            display: flex;
-            align-items: flex-start;
-            gap: 16px;
-            padding: 20px 24px;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
+        /* Question card */
+        .q-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 36px; margin-bottom: 24px; transition: border-color 0.3s; }
+        .q-card.correct-card { border-color: #00c5b5; box-shadow: 0 0 30px rgba(0,197,181,0.1); }
+        .q-card.wrong-card { border-color: #e05c5c; box-shadow: 0 0 30px rgba(224,92,92,0.1); }
+
+        .q-chapter { font-family: 'Montserrat', sans-serif; font-size: 0.6rem; font-weight: 700; letter-spacing: 2px; color: var(--teal); opacity: 0.7; margin-bottom: 10px; }
+        .q-text { font-size: 1.05rem; line-height: 1.65; color: #e0e0e0; margin-bottom: 28px; }
+
+        /* Answer options */
+        .options { display: flex; flex-direction: column; gap: 10px; }
+        .option-btn {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
             border-radius: 10px;
-            margin-bottom: 10px;
-            transition: border-color 0.3s, transform 0.3s;
-        }
-        .source-entry:hover {
-            border-color: var(--teal);
-            transform: translateX(4px);
-        }
-        .source-icon {
-            font-size: 1.3rem;
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
-        .source-body { flex: 1; }
-        .source-text {
-            font-size: 0.9rem;
+            padding: 14px 20px;
             color: #ccc;
-            line-height: 1.7;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 14px;
         }
-        .source-text strong { color: var(--text); }
-        .source-text a {
-            color: var(--teal);
-            text-decoration: none;
-            border-bottom: 1px dotted rgba(0,197,181,0.4);
-            transition: all 0.2s;
-            word-break: break-all;
-            font-size: 0.82rem;
-        }
-        .source-text a:hover { color: #fff; border-bottom-color: #fff; }
-        .source-date {
-            font-size: 0.72rem;
-            color: #555;
-            letter-spacing: 1px;
-            margin-top: 4px;
+        .option-btn:hover:not(:disabled) { border-color: var(--teal); color: #fff; background: var(--teal-dim); }
+        .option-btn:disabled { cursor: default; }
+        .option-btn.selected-correct { border-color: #00c5b5; background: rgba(0,197,181,0.12); color: #fff; }
+        .option-btn.selected-wrong { border-color: #e05c5c; background: rgba(224,92,92,0.1); color: #fff; }
+        .option-btn.reveal-correct { border-color: #00c5b5; background: rgba(0,197,181,0.06); color: #9ae8e0; }
+
+        .option-letter {
+            width: 28px; height: 28px; border-radius: 50%;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            display: flex; align-items: center; justify-content: center;
             font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem; font-weight: 700;
+            flex-shrink: 0;
+            transition: all 0.2s;
         }
+        .selected-correct .option-letter { background: var(--teal); border-color: var(--teal); color: #060614; }
+        .selected-wrong .option-letter { background: #e05c5c; border-color: #e05c5c; color: #fff; }
+        .reveal-correct .option-letter { background: rgba(0,197,181,0.2); border-color: var(--teal); color: var(--teal); }
 
-        /* ── FOOTER ── */
-        footer{text-align:center;padding:60px 40px;border-top:1px solid var(--border);color:var(--teal);font-size:0.8rem;letter-spacing:1px;}
-        footer p{display:flex;justify-content:center;gap:10px;}
+        /* Feedback */
+        .feedback {
+            margin-top: 20px;
+            padding: 16px 20px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            display: none;
+        }
+        .feedback.show { display: block; }
+        .feedback.correct { background: rgba(0,197,181,0.08); border: 1px solid rgba(0,197,181,0.25); color: #9ae8e0; }
+        .feedback.wrong { background: rgba(224,92,92,0.08); border: 1px solid rgba(224,92,92,0.25); color: #f5a0a0; }
+        .feedback strong { color: inherit; }
 
-        /* ── REVEAL ── */
-        .reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease;}
-        .reveal.visible{opacity:1;transform:translateY(0);}
+        /* Next button */
+        .next-btn {
+            margin-top: 24px;
+            padding: 14px 32px;
+            background: linear-gradient(90deg, #005851, #001a33);
+            border: 1px solid var(--teal);
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: none;
+        }
+        .next-btn.show { display: inline-block; }
+        .next-btn:hover { background: var(--teal); color: #060614; box-shadow: 0 0 24px var(--teal-glow); }
+
+        /* ── RESULT SCREEN ── */
+        #result-screen { display: none; text-align: center; padding: 40px 20px; }
+        #result-screen.show { display: block; }
+        .result-score {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: clamp(3rem, 10vw, 6rem);
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+        .result-label { font-size: 1.1rem; color: var(--muted); margin-bottom: 40px; }
+        .result-msg { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1.3rem; text-transform: uppercase; color: var(--teal); margin-bottom: 12px; }
+        .result-sub { color: var(--muted); font-size: 0.9rem; line-height: 1.7; max-width: 480px; margin: 0 auto 40px; }
+
+        .result-badges { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-bottom: 44px; }
+        .r-badge {
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+        .r-badge.ok { background: rgba(0,197,181,0.12); border: 1px solid var(--teal); color: var(--teal); }
+        .r-badge.miss { background: rgba(224,92,92,0.1); border: 1px solid #e05c5c; color: #f5a0a0; }
+
+        .restart-btn {
+            padding: 14px 36px;
+            background: linear-gradient(90deg, #005851, #001a33);
+            border: 1px solid var(--teal);
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            margin-right: 12px;
+        }
+        .restart-btn:hover { background: var(--teal); color: #060614; box-shadow: 0 0 24px var(--teal-glow); }
+        .home-btn {
+            padding: 14px 36px;
+            background: transparent;
+            border: 1px solid #333;
+            color: var(--muted);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .home-btn:hover { border-color: var(--teal); color: var(--teal); }
+
+        /* Footer */
+        footer { text-align: center; padding: 60px 40px; border-top: 1px solid var(--border); color: var(--teal); font-size: 0.8rem; letter-spacing: 1px; }
+        footer p { display: flex; justify-content: center; gap: 10px; }
+
+        /* ── REVEAL (identisch zu anderen Seiten) ── */
+        .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* Karten-Einblendung von unten (ersetzt slide-in) */
+        .q-card {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s;
+        }
+        .q-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
 
-<nav class="topbar">
-    <a href="index.html">START</a>
-    <div class="div"></div>
-    <a href="Facharbeit.pdf">DOWNLOAD</a>
-    <div class="div"></div>
-    <a href="quiz.html">QUIZ</a>
-    <div class="div"></div>
-    <a href="impressum.html">IMPRESSUM</a>
-    <div class="div"></div>
-    <a href="datenschutz.html">DATENSCHUTZ</a>
-    <div class="div"></div>
-    <a href="quellen.html" class="active">QUELLEN</a>
-</nav>
+    <!-- NAVIGATION -->
+    <nav class="topbar">
+        <a href="index.html" class="passive">START</a>
+        <div class="div"></div>
+        <a href="quiz.html" class="active">QUIZ</a>
+        <div class="div"></div>
+        <a href="impressum.html" class="passive">IMPRESSUM</a>
+        <div class="div"></div>
+        <a href="datenschutz.html" class="passive">DATENSCHUTZ</a>
+        <div class="div"></div>
+        <a href="quellen.html" class="passive">QUELLEN</a>
+        <div class="div"></div>
+        <a href="Facharbeit.pdf" class="passive" target="_blank">DOWNLOAD PDF</a>
+    </nav>
 
 <div class="ch-header">
-    <div class="ch-num">Kapitel 12</div>
-    <h1 class="ch-title">Quellenverzeichnis</h1>
-    <p class="ch-lead">Alle Quellen, die für die Erstellung dieser Facharbeit verwendet wurden – alphabetisch sortiert nach Autor bzw. Herausgeber.</p>
+    <div class="ch-num">Interaktiv</div>
+    <h1 class="ch-title">Was hast du<br>gelernt?</h1>
+    <p class="ch-lead">Teste dein Wissen zur Facharbeit – 10 Fragen über KI, Kreativität, Halluzinationen und autonomes Fahren.</p>
 </div>
 
 <hr class="divline">
 
-<div class="content">
+<div class="quiz-wrap">
 
-    <div class="section-label reveal">Onlinequellen & Literatur</div>
-
-    <div class="source-entry reveal">
-        <div class="source-icon">📺</div>
-        <div class="source-body">
-            <div class="source-text">
-                <strong>c't 3003 (Hrsg.):</strong> „OpenClaw: Ja, der Hype ist gerechtfertigt"<br>
-                <a href="https://www.youtube.com/watch?v=ps7kqEXkwEs" target="_blank">https://www.youtube.com/watch?v=ps7kqEXkwEs</a>
-            </div>
-            <div class="source-date">Stand: 15.03.2026</div>
+    <!-- Progress -->
+    <div class="progress-row reveal" id="progress-row">
+        <div class="progress-track">
+            <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
         </div>
+        <span class="progress-label" id="progress-label">FRAGE 1 / 10</span>
     </div>
 
-    <div class="source-entry reveal">
-        <div class="source-icon">🌐</div>
-        <div class="source-body">
-            <div class="source-text">
-                <strong>CONET ISB GmbH (Hrsg.):</strong> „Die Evolution der Künstlichen Intelligenz"<br>
-                <a href="https://www.conet-isb.de/de/online-kundenzeitschrift/detail/die-evolution-der-kuenstlichen-intelligenz" target="_blank">https://www.conet-isb.de/de/online-kundenzeitschrift/detail/die-evolution-der-kuenstlichen-intelligenz</a>
-            </div>
-            <div class="source-date">Stand: 31.10.2025</div>
-        </div>
-    </div>
+    <!-- Question display -->
+    <div id="quiz-area"></div>
 
-    <div class="source-entry reveal">
-        <div class="source-icon">🖼️</div>
-        <div class="source-body">
-            <div class="source-text">
-                <strong>Danilyuk, Pavel:</strong> „Mann-Technologie-Schach-Strategie"<br>
-                <a href="https://www.pexels.com/de-de/foto/mann-technologie-schach-strategie-8438923" target="_blank">https://www.pexels.com/de-de/foto/mann-technologie-schach-strategie-8438923</a>
-            </div>
-            <div class="source-date">Stand: 02.11.2025</div>
-        </div>
-    </div>
-
-    <div class="source-entry reveal">
-        <div class="source-icon">📖</div>
-        <div class="source-body">
-            <div class="source-text">
-                <strong>Gabler Wirtschaftslexikon (Hrsg.):</strong> „Definition: Was ist Denken?"<br>
-                <a href="https://wirtschaftslexikon.gabler.de/definition/denken-28257/version-251892" target="_blank">https://wirtschaftslexikon.gabler.de/definition/denken-28257/version-251892</a>
-            </div>
-            <div class="source-date">Stand: 16.10.2025</div>
-        </div>
-    </div>
-
-    <div class="source-entry reveal">
-        <div class="source-icon">📖</div>
-        <div class="source-body">
-            <div class="source-text">
-                <strong>Gabler Wirtschaftslexikon (Hrsg.):</strong> „Künstliche Intelligenz (KI)"<br>
-                <a href="https://wirtschaftslexikon.gabler.de/definition/kuenstliche-intelligenz-ki-40285" target="_blank">https://wirtschaftslexikon.gabler.de/definition/kuenstliche-intelligenz-ki-40285</a>
-            </div>
-            <div class="source-date">Stand: 20.09.2025</div>
-        </div>
-    </div>
-
-    <div class="source-entry reveal">
-        <div class="source-icon">🌐</div>
-        <div class="source-body">
-            <div class="source-text">
-                <strong>GeeksforGeeks (Hrsg.):</strong> „Problem Solving in Artificial Intelligence"<br>
-                <a href="https://www.geeksforgeeks.org/artificial-intelligence/problem-solving-in-artificial-intelligence" target="_blank">https://www.geeksforgeeks.org/artificial-intelligence/problem-solving-in-artificial-intelligence</a>
-            </div>
-            <div class="source-date">Stand: 01.11.2025</div>
-        </div>
-    </div>
-
-    <div class="source-entry reveal">
-        <div class="source-icon">🌐</div>
-        <div class="source-body">
-            <div class="source-text">
-                <strong>IBM (Hrsg.):</strong> „Was sind KI-Halluzinationen?"<br>
-                <a href="https://www.ibm.com/de-de/think/topics/ai-hallucinations" target="_blank">https://www.ibm.com/de-de/think/topics/ai-hallucinations</a>
-            </div>
-            <div class="source-date">Stand: 15.03.2026</div>
-        </div>
-    </div>
-
-    <div class="source-entry reveal">
-        <div class="source-icon">🌐</div>
-        <div class="source-body">
-            <div class="source-text">
-                <strong>IBM Deutschland GmbH (Hrsg.):</strong> „Was sind neuronale Netzwerke?"<br>
-                <a href="https://www.ibm.com/de-de/think/topics/neural-networks" target="_blank">https://www.ibm.com/de-de/think/topics/neural-networks</a>
-            </div>
-            <div class="source-date">Stand: 18.10.2025</div>
-        </div>
-    </div>
-
-    <div class="source-entry reveal">
-        <div class="source-icon">🌐</div>
-        <div class="source-body">
-            <div class="source-text">
-                <strong>Landeszentrale für politische Bildung Baden-Württemberg (Hrsg.):</strong> „Autonomes Fahren"<br>
-                <a href="https://www.lpb-bw.de/autonomes-fahren" target="_blank">https://www.lpb-bw.de/autonomes-fahren</a>
-            </div>
-            <div class="source-date">Stand: 15.03.2026</div>
-        </div>
-    </div>
-
-    <div class="source-entry reveal">
-        <div class="source-icon">📚</div>
-        <div class="source-body">
-            <div class="source-text">
-                <strong>Langenscheidt KG (Hrsg.):</strong> Langenscheidts Großwörterbuch. Deutsch als Fremdsprache, „künstlich", S. 588, Langenscheidt, Berlin/München, 1997.
-            </div>
-            <div class="source-date">Printquelle</div>
-        </div>
-    </div>
-
-    <div class="source-entry reveal">
-        <div class="source-icon">🌐</div>
-        <div class="source-body">
-            <div class="source-text">
-                <strong>Laux, Lukas:</strong> „Künstliche Intelligenz in der Kunst"<br>
-                <a href="https://ki-campus.org/blog/ki-kreativitaet" target="_blank">https://ki-campus.org/blog/ki-kreativitaet</a>
-            </div>
-            <div class="source-date">Stand: 01.11.2025</div>
-        </div>
-    </div>
-
-    <div class="source-entry reveal">
-        <div class="source-icon">🖼️</div>
-        <div class="source-body">
-            <div class="source-text">
-                <strong>Metamorphoza:</strong> „Vehicle Autonomous"<br>
-                <a href="https://pixabay.com/photos/vehicle-autonomous-4759347/" target="_blank">https://pixabay.com/photos/vehicle-autonomous-4759347/</a>
-            </div>
-            <div class="source-date">Stand: 03.05.2026</div>
-        </div>
-    </div>
-
-    <div class="source-entry reveal">
-        <div class="source-icon">🌐</div>
-        <div class="source-body">
-            <div class="source-text">
-                <strong>NeuroNation (Hrsg.):</strong> „Intelligenz: Was ist das genau?"<br>
-                <a href="https://www.neuronation.com/science/de/definition-der-intelligenz-was-ist-das-eigentlich" target="_blank">https://www.neuronation.com/science/de/definition-der-intelligenz-was-ist-das-eigentlich</a>
-            </div>
-            <div class="source-date">Stand: 16.10.2025</div>
-        </div>
-    </div>
-
-    <div class="source-entry reveal">
-        <div class="source-icon">🌐</div>
-        <div class="source-body">
-            <div class="source-text">
-                <strong>SAP SE (Hrsg.):</strong> „Was ist Machine Learning? – Definition von Machine Learning im Detail"<br>
-                <a href="https://www.sap.com/germany/products/artificial-intelligence/what-is-machine-learning.html" target="_blank">https://www.sap.com/germany/products/artificial-intelligence/what-is-machine-learning.html</a>
-            </div>
-            <div class="source-date">Stand: 18.10.2025</div>
-        </div>
-    </div>
-
-    <div class="source-entry reveal">
-        <div class="source-icon">🌐</div>
-        <div class="source-body">
-            <div class="source-text">
-                <strong>Schneider, Florian:</strong> „Entscheidungsprozesse: Mensch vs. Maschine"<br>
-                <a href="https://mexxon.com/entscheidungsprozesse-mensch-vs-maschine" target="_blank">https://mexxon.com/entscheidungsprozesse-mensch-vs-maschine</a>
-            </div>
-            <div class="source-date">Stand: 31.10.2025</div>
-        </div>
-    </div>
-
-    <div class="source-entry reveal">
-        <div class="source-icon">📰</div>
-        <div class="source-body">
-            <div class="source-text">
-                <strong>Voßberg, Tobias:</strong> „Neue Studie: Mehrheit der KI-Modelle spielt bei unsinnigen Rechtsfragen einfach mit"<br>
-                <a href="https://rsw.beck.de/aktuell/daily/meldung/detail/benchmark-studie-ai-ki-modelle-slop-halluzination-unsinnigen-rechtsfragen" target="_blank">https://rsw.beck.de/aktuell/daily/meldung/detail/benchmark-studie-ai-ki-modelle-slop-halluzination-unsinnigen-rechtsfragen</a>
-            </div>
-            <div class="source-date">Stand: 10.03.2026</div>
-        </div>
+    <!-- Result screen -->
+    <div id="result-screen">
+        <div class="result-score" id="result-score">0/10</div>
+        <div class="result-label">Punkte erreicht</div>
+        <div class="result-msg" id="result-msg"></div>
+        <div class="result-sub" id="result-sub"></div>
+        <div class="result-badges" id="result-badges"></div>
+        <button class="restart-btn" onclick="startQuiz()">↺ Nochmal versuchen</button>
+        <a href="index.html" class="home-btn">↑ Zur Übersicht</a>
     </div>
 
 </div>
@@ -314,10 +265,255 @@
 </footer>
 
 <script>
-    document.getElementById('jahr').textContent = new Date().getFullYear();
+document.getElementById('jahr').textContent = new Date().getFullYear();
 
-    const obs=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('visible')),{threshold:0.08});
-    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+const QUESTIONS = [
+    {
+        chapter: "Kapitel 1 – Einleitung",
+        q: "Wie lautet die zentrale Problemfrage dieser Facharbeit?",
+        options: [
+            "Wird KI den Menschen ersetzen?",
+            "Wo liegen die Grenzen künstlicher Intelligenz im Hinblick auf Denken, Kreativität und Problemlösung?",
+            "Wie funktioniert maschinelles Lernen auf Code-Ebene?",
+            "Welche KI-Systeme sind am leistungsfähigsten?"
+        ],
+        correct: 1,
+        feedback: "Die Problemfrage untersucht drei Kernbereiche: Denken, Kreativität und Problemlösung – und vergleicht dabei Mensch und Maschine."
+    },
+    {
+        chapter: "Kapitel 2 – Definitionen",
+        q: "Was beschreibt der Begriff \"Machine Learning\" (maschinelles Lernen)?",
+        options: [
+            "Eine Methode, bei der jede Reaktion manuell programmiert wird",
+            "Ein Teilbereich der KI, bei dem Computer aus Daten und Erfahrungen lernen – ohne explizite Programmierung jeder Reaktion",
+            "Ein Verfahren zur rein mathematischen Berechnung von Ergebnissen",
+            "Die Fähigkeit von Computern, Emotionen zu verarbeiten"
+        ],
+        correct: 1,
+        feedback: "Machine Learning nutzt Algorithmen, die Muster in großen Datensätzen erkennen und dadurch immer genauer werden – ohne dass jede Reaktion vorher festgelegt sein muss."
+    },
+    {
+        chapter: "Kapitel 3 – Geschichte",
+        q: "Welches Ereignis gilt als entscheidender Wendepunkt in der KI-Geschichte?",
+        options: [
+            "Die Erfindung des Internets 1983",
+            "Die Veröffentlichung von ChatGPT 2022",
+            "Der Sieg von AlexNet im ImageNet-Wettbewerb 2012",
+            "Der erste Turing-Test 1950"
+        ],
+        correct: 2,
+        feedback: "AlexNet gewann 2012 den ImageNet-Wettbewerb mit einem enormen Vorsprung und läutete die Ära des Deep Learning ein – ein zentraler Meilenstein der KI-Geschichte."
+    },
+    {
+        chapter: "Kapitel 4 – Denkprozess",
+        q: "Was sind \"Heuristiken\" im menschlichen Denken?",
+        options: [
+            "Komplexe mathematische Algorithmen zur Problemlösung",
+            "Mentale Abkürzungen, die Entscheidungen vereinfachen – aber nicht immer zur optimalen Lösung führen",
+            "Eine Form der KI-gestützten Entscheidungsfindung",
+            "Bewusste, rationale Überlegungsprozesse ohne emotionalen Einfluss"
+        ],
+        correct: 1,
+        feedback: "Heuristiken sind kognitive Faustregeln, die Menschen nutzen, um schnell Entscheidungen zu treffen. Sie sind effizient, aber fehleranfällig – im Gegensatz zur KI, die auf Wahrscheinlichkeiten optimiert."
+    },
+    {
+        chapter: "Kapitel 5 – Kreativität",
+        q: "Welche Form von Kreativität kann eine KI laut der Facharbeit NICHT ausüben?",
+        options: [
+            "Kombinatorische Kreativität",
+            "Stilistische Kreativität",
+            "Transformative Kreativität",
+            "Bildgenerierung aus Texteingaben"
+        ],
+        correct: 2,
+        feedback: "Transformative Kreativität – das Schaffen wirklich neuer Konzepte mit emotionaler und kultureller Bedeutung – erfordert Bewusstsein. Dieser Bereich bleibt eine rein menschliche Fähigkeit."
+    },
+    {
+        chapter: "Kapitel 6 – Problemlösung",
+        q: "Worin liegt der wichtigste Unterschied zwischen menschlicher und maschineller Problemlösung?",
+        options: [
+            "Menschen sind bei Massendaten immer schneller als KI",
+            "KI kann keine mathematischen Aufgaben lösen",
+            "Der Mensch kann kontextbezogen und flexibel denken – die KI verbessert nur bestehende Muster",
+            "KI trifft moralische Entscheidungen besser als Menschen"
+        ],
+        correct: 2,
+        feedback: "KI ist innerhalb definierter Regelwerke hocheffizient, fehlt aber das inhaltliche Verständnis. Der Mensch kann neue Wege einschlagen und moralische sowie kontextuelle Faktoren einbeziehen."
+    },
+    {
+        chapter: "Kapitel 7 – OpenClaw",
+        q: "Was unterscheidet OpenClaw grundlegend von herkömmlichen KI-Chatbots wie ChatGPT?",
+        options: [
+            "OpenClaw ist deutlich intelligenter und bewusster",
+            "OpenClaw erhält systemweiten Zugriff auf das Betriebssystem – Dateien, Adminrechte, Software-Installation",
+            "OpenClaw kann keine Texte generieren",
+            "OpenClaw läuft ausschließlich auf Smartphones"
+        ],
+        correct: 1,
+        feedback: "OpenClaw markiert den Übergang vom \"Chatbot\" zum \"System-Agenten\": Die KI agiert nicht mehr nur im Browser, sondern steuert das gesamte Betriebssystem autonom."
+    },
+    {
+        chapter: "Kapitel 8 – Halluzinationen",
+        q: "Was ist das Phänomen der \"Sycophancy\" bei KI-Modellen?",
+        options: [
+            "KI-Modelle verweigern jede Antwort auf schwierige Fragen",
+            "KI-Modelle korrigieren Nutzer zu aggressiv und beleidigen sie",
+            "KI-Modelle unterstützen fehlerhafte Annahmen des Nutzers, anstatt sie zu korrigieren – und rationalisieren den Unsinn sogar überzeugend",
+            "KI-Modelle geben absichtlich falsche Antworten, um zu täuschen"
+        ],
+        correct: 2,
+        feedback: "Sycophancy bedeutet \"Anbiederung\": KI-Modelle neigen dazu, dem Nutzer nach dem Mund zu reden, anstatt Denkfehler aufzuzeigen. Besonders fatal: Mehr \"Nachdenken\" macht die falsche Antwort oft noch überzeugender."
+    },
+    {
+        chapter: "Kapitel 9 – Autonomes Fahren",
+        q: "Was besagt das Prinzip \"Privacy by Design\" im Kontext autonomer Fahrzeuge?",
+        options: [
+            "Fahrzeuge dürfen keine Kameras oder Sensoren haben",
+            "Datenschutz muss von Anfang an in die Fahrzeugarchitektur integriert werden – nicht als nachträgliche Option",
+            "Nur staatliche Stellen dürfen auf Fahrzeugdaten zugreifen",
+            "Nutzer müssen alle Daten manuell löschen können"
+        ],
+        correct: 1,
+        feedback: "\"Privacy by Design\" fordert, dass Datenschutz durch Verschlüsselung und Anonymisierung fest in die Systemarchitektur eingebaut wird – nicht erst nachträglich hinzugefügt."
+    },
+    {
+        chapter: "Kapitel 10 – Fazit",
+        q: "Was ist laut Fazit der Facharbeit die wichtigste Rolle des Menschen im Umgang mit KI?",
+        options: [
+            "Den Menschen vollständig durch KI zu ersetzen",
+            "KI als autonomen Entscheidungsträger einzusetzen und zu vertrauen",
+            "KI als assistierendes Werkzeug unter ständiger menschlicher Aufsicht zu betrachten",
+            "KI-Entwicklung zu stoppen, bis Bewusstsein nachgewiesen ist"
+        ],
+        correct: 2,
+        feedback: "Die zentrale Lehre: KI ist ein mächtiges, aber strukturell unzuverlässiges Werkzeug. Kritische Reflexion und ethische Urteilsbildung bleiben unersetzlich menschliche Kompetenzen."
+    }
+];
+
+let current = 0;
+let score = 0;
+let answered = false;
+const userAnswers = [];
+
+function startQuiz() {
+    current = 0;
+    score = 0;
+    answered = false;
+    userAnswers.length = 0;
+    document.getElementById('result-screen').classList.remove('show');
+    document.getElementById('progress-row').style.display = 'flex';
+    renderQuestion();
+}
+
+function renderQuestion() {
+    answered = false;
+    const q = QUESTIONS[current];
+    const total = QUESTIONS.length;
+    const pct = (current / total) * 100;
+
+    document.getElementById('progress-fill').style.width = pct + '%';
+    document.getElementById('progress-label').textContent = `FRAGE ${current + 1} / ${total}`;
+
+    const letters = ['A', 'B', 'C', 'D'];
+    const optionsHTML = q.options.map((opt, i) => `
+        <button class="option-btn" onclick="selectAnswer(${i})" data-index="${i}">
+            <span class="option-letter">${letters[i]}</span>
+            <span>${opt}</span>
+        </button>
+    `).join('');
+
+    document.getElementById('quiz-area').innerHTML = `
+        <div class="q-card" id="q-card">
+            <div class="q-chapter">${q.chapter}</div>
+            <div class="q-text">${q.q}</div>
+            <div class="options">${optionsHTML}</div>
+            <div class="feedback" id="feedback"></div>
+            <button class="next-btn" id="next-btn" onclick="nextQuestion()">
+                ${current + 1 < total ? 'Nächste Frage →' : 'Ergebnis anzeigen →'}
+            </button>
+        </div>
+    `;
+
+    // Karte von unten einblenden – identisch zur reveal-Logik der anderen Seiten
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            const card = document.getElementById('q-card');
+            if (card) card.classList.add('visible');
+        });
+    });
+}
+
+function selectAnswer(idx) {
+    if (answered) return;
+    answered = true;
+
+    const q = QUESTIONS[current];
+    const correct = q.correct;
+    const btns = document.querySelectorAll('.option-btn');
+    const fb = document.getElementById('feedback');
+    const card = document.getElementById('q-card');
+
+    btns.forEach(b => b.disabled = true);
+
+    if (idx === correct) {
+        score++;
+        btns[idx].classList.add('selected-correct');
+        card.classList.add('correct-card');
+        fb.className = 'feedback correct show';
+        fb.innerHTML = `<strong>✓ Richtig!</strong> ${q.feedback}`;
+        userAnswers.push({ correct: true, chapter: q.chapter });
+    } else {
+        btns[idx].classList.add('selected-wrong');
+        btns[correct].classList.add('reveal-correct');
+        card.classList.add('wrong-card');
+        fb.className = 'feedback wrong show';
+        fb.innerHTML = `<strong>✗ Leider falsch.</strong> ${q.feedback}`;
+        userAnswers.push({ correct: false, chapter: q.chapter });
+    }
+
+    document.getElementById('next-btn').classList.add('show');
+}
+
+function nextQuestion() {
+    current++;
+    if (current >= QUESTIONS.length) {
+        showResult();
+    } else {
+        renderQuestion();
+    }
+}
+
+function showResult() {
+    document.getElementById('quiz-area').innerHTML = '';
+    document.getElementById('progress-fill').style.width = '100%';
+    document.getElementById('progress-label').textContent = `FERTIG`;
+
+    const pct = score / QUESTIONS.length;
+    let msg, sub;
+    if (pct === 1)        { msg = "Perfekt! Volle Punktzahl 🎯"; sub = "Du hast alle Kapitel der Facharbeit vollständig verstanden. Beeindruckend!"; }
+    else if (pct >= 0.8)  { msg = "Sehr gut!"; sub = "Du hast die wichtigsten Konzepte der Facharbeit verinnerlicht. Ein paar Details kannst du nochmal nachlesen."; }
+    else if (pct >= 0.6)  { msg = "Gut gemacht."; sub = "Solides Grundwissen vorhanden. Lies dir die Kapitel zu den falschen Antworten nochmal durch."; }
+    else if (pct >= 0.4)  { msg = "Noch Luft nach oben."; sub = "Einige Kernthemen sind noch nicht ganz gefestigt. Ein zweiter Durchgang lohnt sich!"; }
+    else                  { msg = "Nochmal von vorne."; sub = "Die Facharbeit hält noch einiges für dich bereit – lies die Kapitel durch und versuche es erneut."; }
+
+    document.getElementById('result-score').textContent = `${score}/${QUESTIONS.length}`;
+    document.getElementById('result-msg').textContent = msg;
+    document.getElementById('result-sub').textContent = sub;
+
+    const badgeContainer = document.getElementById('result-badges');
+    badgeContainer.innerHTML = userAnswers.map((a, i) =>
+        `<span class="r-badge ${a.correct ? 'ok' : 'miss'}">F${i+1} ${a.correct ? '✓' : '✗'}</span>`
+    ).join('');
+
+    document.getElementById('result-screen').classList.add('show');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Reveal-Observer für statische Elemente (Progress-Bar etc.)
+const obs = new IntersectionObserver(e => e.forEach(x => x.isIntersecting && x.target.classList.add('visible')), { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+startQuiz();
 </script>
 
 </body>

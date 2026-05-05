@@ -107,6 +107,24 @@
             text-transform: uppercase; /* Passt oft gut zum weiten Letter-Spacing */
         }
 
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            animation: fadeUp 1s 0.3s ease both;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 800px; /* Begrenzt die Bildgröße */
+            height: auto;
+            filter: drop-shadow(0 0 30px var(--teal-glow));
+            /* Kleiner Floating-Effekt */
+            animation: float 6s ease-in-out infinite;
+            border-radius: 5%;
+            margin-top: 5%;
+        }
+
         /* REVEAL */
         .reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease;}
         .reveal.visible{opacity:1;transform:translateY(0);}
@@ -139,6 +157,10 @@
 
 <div class="content">
 <p class="reveal">Im Wesentlichen unterscheiden sich menschliche und maschinelle Intelligenz in der Art und Weise, wie Entscheidungen getroffen werden.</p>
+
+<div class="hero-image">
+    <img src="/Bilder/brianpenny-ai-generated-8540920.jpg" alt="KI vs Mensch">
+</div>
 
 <h2>Wie die KI denkt</h2>
 <p class="reveal">Künstliche Intelligenz analysiert vorhandene Datensätze, berechnet Wahrscheinlichkeiten und optimiert Entscheidungsprozesse nach objektiven Kriterien. Viele Entscheidungen – etwa im wirtschaftlichen Bereich – können durch KI effizient und automatisiert gefällt werden. Doch dieser rein rationale Ansatz ist ein grundlegendes Merkmal, das die KI vom Menschen unterscheidet.</p>
