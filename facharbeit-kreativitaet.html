@@ -21,12 +21,53 @@
         *{margin:0;padding:0;box-sizing:border-box;}
         body{background:var(--bg);font-family:'Inter',sans-serif;color:var(--text);overflow-x:hidden;}
 
-        /* ── TOPBAR ── */
-        nav.topbar{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;gap:4px;padding:0 24px;height:54px;background:rgba(6,6,20,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);flex-wrap:wrap;}
-        nav.topbar a{color:var(--muted);text-decoration:none;font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.65rem;letter-spacing:1.5px;padding:5px 9px;border-radius:4px;transition:color 0.2s,background 0.2s;}
-        nav.topbar a:hover{color:var(--teal);background:var(--teal-dim);}
-        nav.topbar a.active{color:var(--teal);background:var(--teal-dim);}
-        nav.topbar .div{width:1px;height:18px;background:var(--border);margin:0 4px;}
+        /* ── TOPBAR (Optimiert für Mobile: Horizontal scrollbar) ── */
+        nav.topbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            min-height: 56px;
+            background: rgba(6,6,20,0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            
+            /* Verhindert Zeilenumbruch und erlaubt wischen auf dem Handy */
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; /* Firefox */
+        }
+        nav.topbar::-webkit-scrollbar { 
+            display: none; /* Safari & Chrome */
+        }
+        
+        nav.topbar a {
+            color: var(--muted);
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 0.65rem;
+            letter-spacing: 1.5px;
+            padding: 10px 12px; /* Größeres Touch-Target für Finger */
+            border-radius: 4px;
+            transition: color 0.2s, background 0.2s;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        nav.topbar a:hover, nav.topbar a.active { 
+            color: var(--teal); 
+            background: var(--teal-dim); 
+        }
+        nav.topbar .div {
+            width: 1px; height: 18px;
+            background: var(--border);
+            margin: 0 4px;
+            flex-shrink: 0;
+        }
 
         /* CHAPTER HEADER */
         .ch-header{padding:130px 40px 60px;max-width:860px;margin:0 auto;}
@@ -140,7 +181,7 @@
         <div class="div"></div>
         <a href="quellen.html" class="passive">QUELLEN</a>
         <div class="div"></div>
-        <a href="Facharbeit.pdf" class="passive" target="_blank">DOWNLOAD PDF</a>
+        <a href="Facharbeit.pdf" class="passive" target="_blank">PDF</a>
 
 
     </nav>
